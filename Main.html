@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mortgage calculator </title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="index.js" type="text/javaScript"> </script>
+  </head>
+  <body>
+    <div id="container">
+      <h2>Mortgage loan Installment Calculator</h2>
+
+      <div id="mortgage_src"><!-- loan form will be here -->
+        <form name="mortgage_form">
+          <table style="margin:10px;">
+          <tr>
+              <td>Principle Amount:</td>
+              <td><input type="text" name="principle" size="10" /></td>
+          </tr>
+          <tr>
+              <td>Number Of Month:</td>
+              <td> <input type="text" name="periods" size="10" /></td>
+          </tr>
+          <tr>
+              <td>Annual Interest Rate:<br/><span style="font-size:80%">(ex.3.25% = 3.25)</span></td>
+              <td><input type="text" name="intrest" size="10" /> </td>
+          </tr>
+          <tr>
+              <td>Additional Monthly Payment: </td>
+              <td><input type="text" name="additional" size="10" /> </td>
+          </tr>
+          <tr>
+              <td><input type="button" onclick="endorse()" value="Calculate" /></td>
+              <td><input type="button" onclick="reset()" value="Reset" /></td>
+          </tr>
+        </table>
+        </form>
+      </div>
+      <div id="mortgage_info"><!--loan information will be display here -->
+          Mortgage Infomation
+      </div>
+      <div  id="table_header">
+        <table cellpadding ="15" border="1">
+          <tr>
+            <td width="50" align="center"><b>Terms</b></td>
+            <td width="80" align="center"><b>Payment</b></td>
+            <td width="80" align="center"><b>Principle</b></td>
+            <td width="70" align="center"><b>Interest</b></td>
+            <td width="100" align="center"><b>Interest Paid</b></td>
+            <td width="70" align="center"><b>Balance</b></td>
+          </tr>
+        </table>
+      </div>
+      <div id="table">
+          Table
+      </div>
+
+    </div>
+  </body>
+  </html>
