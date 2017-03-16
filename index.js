@@ -1,8 +1,7 @@
-
-function reset() {
-  document.mortgage_form.principle.value="";
-  document.mortgage_form.periods.value="";
-  document.mortgage_form.interest.value="";
+function Reset() {
+  document.mortgage_form.amount.value="";
+  document.mortgage_form.months.value="";
+  document.mortgage_form.rate.value="";
   document.mortgage_form.additional.value="0";
 
   document.getElementById("mortgage_info").innerHTML="";
@@ -10,55 +9,55 @@ function reset() {
 }
 //----------------------------------------------------//
 function endorse() {
-  var principle = document.mortgage_form.principle.value;
-  var periods = document.mortgage_form.periods.value;
-  var interest = document.mortgage_form.interest.value;
+  var amount = document.mortgage_form.amount.value;
+  var months = document.mortgage_form.months.value;
+  var rate = document.mortgage_form.rate.value;
   var additional = document.mortgage_form.additional.value;
-  if(principle <= 0 || isNaN(Number(principle)) ){
-    alert ("Please enter a valid Principle Amount.");
-    document.mortgage_form.principle.value = "";
+  if(amount <= 0 || isNaN(Number(amount)) ){
+    alert ("Please enter a valid amount Amount.");
+    document.mortgage_form.amount.value = "";
   }
-  else if (periods <= 0 || parseInt(periods) != periods) {
-    alert ("Please enter a valid Periods(Months).");
-    document.mortgage_form.periods.value = "";
+  else if (months <= 0 || parseInt(months) != months) {
+    alert ("Please enter a valid months(Months).");
+    document.mortgage_form.months.value = "";
   }
-  else if (interest <= 0 || isNaN(Number(interest))) {
-    alert("Please enter a valid Interest Rate.");
-    document.mortgage_form.interest.value = "";
+  else if (rate <= 0 || isNaN(Number(rate))) {
+    alert("Please enter a valid rate Rate.");
+    document.mortgage_form.rate.value = "";
   }
   else if (additional <= 0 || isNaN(Number(additional))) {
-    alert("Please enter a valid Additional Amount.");
+    alert("Please enter a valid additional Amount.");
     document.mortgage_form.additional.value="0";
   }
   else {
-    calculate(parseFloat(principle), parseInt(periods), parseFloat(interest), parseFloat(additional));
+    calculate(parseFloat(amount), parseInt(months), parseFloat(rate), parseFloat(additional));
     alert("Validation completed");
   }
 }
 
-function calculate(principle, periods, interest, additional) {
-    i = interest/100;
-    var installment = principle * (i/12)*Math.pow((1 + i/12), periods)/(Math.pow((1+i/12),periods)-1);
+function calculate(amount, months, rate, additional) {
+    i = rate/100;
+    var installment = amount * (i/12)*Math.pow((1 + i/12), months)/(Math.pow((1+i/12),months)-1);
 
 
     var pro ="";
-      pro += "<table width = '250'>";
-      pro +="<tr><td>Principle Amount:</td>";
-      pro +="<td align ='right'>$"+principle+"</td></tr>";
+      pro += "<table width = '300'>";
+      pro +="<tr><td>Loan Amount:</td>";
+      pro +="<td align ='right'>$"+amount+"</td></tr>";
       pro +="<tr><td>Number of Months:</td>";
-      pro +="<td align ='right'>"+periods+"</td></tr>";
+      pro +="<td align ='right'>"+months+"</td></tr>";
 
-      pro +="<tr><td>Interest Rate:</td>";
-      pro +="<td align ='right'>$"+interest+"</td></tr>";
+      pro +="<tr><td> Rate:</td>";
+      pro +="<td align ='right'>$"+rate+"</td></tr>";
 
-      pro +="<tr><td>Installment:</td>";
+      pro +="<tr><td>Payment:</td>";
       pro +="<td align ='right'>$"+round(installment, 2)+"</td></tr>";
 
-      pro +="<tr><td> Additional Amount:</td>";
+      pro +="<tr><td> additional Amount:</td>";
       pro +="<td align ='right'>$"+additional+"</td></tr>";
 
-      pro +="<tr><td>Total Payment:</td>";
-      pro +="<td align ='right'>$"+round(installment+additional, 2)+"</td></tr>";
+      pro +="<tr><td>Total Installment:</td>";
+      pro +="<td align ='right'>$"+round(installment + additional, 2)+"</td></tr>";
       pro += "</table>";
   document.getElementById("mortgage_info").innerHTML= pro;
 
@@ -72,30 +71,33 @@ function calculate(principle, periods, interest, additional) {
     table +="<td width = '60'>&nbsp;</td>";
     table +="<td width = '60'>&nbsp;</td>";
     table +="<td width = '85'>&nbsp;</td>";
-    table +="<td width = '70'>"+round(loan_amt,2)+"</td>";
+    table +="<td width = '70'>"+round(amount,2)+"</td>";
     table +="</tr>";
 
-var balance = principle;
+var balance = amount;
 var payCounter = 1;
-var totalInterest = 0;
+var totalrate = 0;
+//var additional = 0;
 installment = installment + additional;
 while (balance > 0 )
 // create rows here
     {
-      newInterest= (i/12) * balance;
-/*     If (monthly_payment > current_balance){
-        monthly_payment = current_balance + towards_interest;
-      } */
-      newBalance = installment - newInterest;
-      totalInterest = totalInterest + newInterest;
+      newrate= (i/12) * balance;
+/*
+   If (installment > balance){
+        balance = installment - newrate;
+      }
+*/
+      newBalance = installment - newrate;
+      totalrate = totalrate + newrate;
       balance = balance - newBalance;
 
     table +="<tr>";
         table +="<td>"+payCounter+"</td>";
         table +="<td>"+round(installment,2)+"</td>";
         table +="<td>"+round(newBalance,2)+"</td>";
-        table +="<td>"+round(newInterest,2)+"</td>";
-        table +="<td>"+round(totalInterest,2)+"</td>";
+        table +="<td>"+round(newrate,2)+"</td>";
+        table +="<td>"+round(totalrate,2)+"</td>";
         table +="<td>"+round(balance,2)+"</td>";
     table +="</tr>";
 
